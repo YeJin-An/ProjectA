@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'user',
     'notice',
     'activate',
+    'accounts',
 
     'corsheaders',
     'rest_framework',

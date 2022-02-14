@@ -4,9 +4,11 @@ from django.urls import path,include
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
     path('user/', include('user.urls')),
     path('notice/',include('notice.urls')),
     path('activate/',include('activate.urls')),
