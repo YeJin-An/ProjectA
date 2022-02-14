@@ -1,7 +1,7 @@
 from django.contrib import admin
 from activate.models import Activate
 
+@admin.register(Activate)
 class ActivateAdmin(admin.ModelAdmin):
-  pass
-
-admin.site.register(Activate,ActivateAdmin)
+    list_display = ["id", "title"]
+    search_fields = ["title"]

@@ -6,5 +6,5 @@ router = routers.DefaultRouter()
 router.register('notices', NoticeViewSet)
 
 urlpatterns = [
-  path('',include(router.urls))
+  path('api/',include(router.urls)),
 ]
