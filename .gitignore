@@ -2,8 +2,6 @@ venv
 .idea
 .vscode
 __pycache__
-migrations
 db.sqlite3
 media
 .env*
-__init__.py

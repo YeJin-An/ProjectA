@@ -10,26 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from datetime import timedelta
+from environ import Env
 from pathlib import Path
-import os
+
 #edit
 import pymysql
 pymysql.install_as_MySQLdb()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = Env()
+
+dot_env_path = BASE_DIR / ".env"
+if dot_env_path.exists():
+    with dot_env_path.open(encoding="ut-8") as f:
+        env.read_env(f, overwrite=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0t!v!(za9j)r2t65*tmuu2lx-(56!!f**ohxsi=qtl6dml!4de'
+SECRET_KEY = env.str("SECRET_KEY", default="--- SECRET KEY ----")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWEd_HOSTS', default=[])
 
 
 # Application definition
@@ -67,7 +75,9 @@ ROOT_URLCONF = 'ProjectA.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR/ 'ProjectA'/'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,13 +158,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # django-cors-headers
 # https://github.com/adamchainz/django-cors-header
 
-CORS_ALLOWED_ORIGNS = [
-    "http://127.0.0.1:8000",
-    "http://localhost:3000"
-]
+CORS_ALLOWED_ORIGNS = env.list("CORS_ALLOWED_ORIGINS",
+                                default=["http://localhost:3000"])
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = False
+ACCESS_TOKEN_LIFETIME_DAYS = env.int("ACCESS_TOKEN_LIFETIME_DAYS", default=0)
+ACCESS_TOKEN_LIFETIME_HOURS = env.int("ACCESS_TOKEN_LIFETIME_HOURS", default=0)
+ACCESS_TOKEN_LIFETIME_MINUTES = env.int("ACCESS_TOKEN_LIFETIME_MINUTES", default=5)
 
 # django-rest-framework
 # https://www.django-rest-framework.org/#installation
@@ -163,4 +172,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+
+    'ACCESS_TOKEN_LIFETIME': timedelta(
+        days=ACCESS_TOKEN_LIFETIME_DAYS,
+        hours=ACCESS_TOKEN_LIFETIME_HOURS,
+        minutes=ACCESS_TOKEN_LIFETIME_MINUTES,
+    ),
 }

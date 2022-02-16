@@ -1,7 +1,17 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from activate.models import Activate
+from news.models import Article
 
-class ActivateSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Activate
-    fields = ('id','category','title','content','image','user')
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ["username", "first_name", "last_name"]
+
+
+class ArticleSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer(read_only=True)
+
+    class Meta:
+        model = Article
+        fields = ["id", "title", "content", "photo", "author"]
