@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 #edit
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -145,12 +146,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # django-cors-headers
-# https://github.com/adamchainz/django-cors-headers
-CORS_ALLOWED_ORIGINS = [
+# https://github.com/adamchainz/django-cors-header
+
+CORS_ALLOWED_ORIGNS = [
     "http://127.0.0.1:8000",
     "http://localhost:3000"
 ]
-CSRF_COOKIE_NAME = "csrftoken"
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
 
 # django-rest-framework
 # https://www.django-rest-framework.org/#installation
