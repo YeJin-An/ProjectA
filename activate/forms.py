@@ -4,7 +4,7 @@ from activate.models import Activate
 class ActicleForm(forms.ModelForm):
   class Meta:
     model = Activate
-    fields = fields = ('id','category','title','content','image','user')
+    fields = "__all__"
 
     def clean_title(self):
         title = self.cleaned_data.get("title")
