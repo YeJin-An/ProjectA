@@ -14,4 +14,4 @@ class ActivateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Activate
-        fields = ["id", "category","title","content","image","author"]
+        fields = ["id", "category","title","content","photo","author"]

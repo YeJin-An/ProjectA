@@ -12,5 +12,5 @@ class Activate(models.Model):
                                  RegexValidator(r"[ㄱ-힣]", message="한글을 입력해주세요."),
                              ])
   content = models.TextField()
-  image = models.TextField()
+  photo = models.TextField()
   user = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE)
