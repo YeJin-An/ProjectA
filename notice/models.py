@@ -3,8 +3,9 @@ from django.db import models
 from user.models import User
 
 class Notice(models.Model):
-  id = models.CharField(max_length=15)
+
+  id = models.AutoField(primary_key=True)
   title = models.CharField(max_length=100)
   content = models.TextField()
   created_at = models.DateField()
-  user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+  author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
