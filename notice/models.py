@@ -17,5 +17,5 @@ class Notice(models.Model):
   title = models.CharField(max_length=5, validators=[validate_even])
   content = models.TextField()
   created_at = models.DateField()
-  author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

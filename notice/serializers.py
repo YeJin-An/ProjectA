@@ -12,5 +12,5 @@ class NoticeSerializer(serializers.ModelSerializer):
   
   class Meta:
     model = Notice
-    fields = ["id","author","title","content","created_at"]
-#fields = "__all__"
+    fields = ["id","author","title","content","created_at",'user']
+    # fields = "__all__"
