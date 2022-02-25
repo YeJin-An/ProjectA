@@ -11,7 +11,9 @@ User = get_user_model()
 
 
 class UserCreationSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password = serializers.CharField(
+        write_only=True, required=True, validators=[validate_password]
+        )
     password2 = serializers.CharField(write_only=True, required=True)
 
     class Meta:
@@ -27,8 +29,9 @@ class UserCreationSerializer(serializers.ModelSerializer):
         # 리턴 : 생성된 User 모델 인스턴스
         username = validated_data["username"]
         password = validated_data["password"]
+        email = validated_data.get('email','')
 
-        new_user = User(username=username)
+        new_user = User(username=username, email=email)
         new_user.set_password(password)
         new_user.save()
 
