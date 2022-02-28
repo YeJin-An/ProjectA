@@ -8,9 +8,16 @@ class AuthorSerializer(serializers.ModelSerializer):
     fields = ["username","first_name",'last_name']
 
 class NoticeSerializer(serializers.ModelSerializer):
-  author = AuthorSerializer(read_only=True)
+  author = AuthorSerializer()
   
   class Meta:
     model = Notice
-    fields = ["id","author","title","content","created_at",'user']
+    fields = ["id",'author',"title","content","created_at",'author']
     # fields = "__all__"
+
+
+# 비로그인 사용자용
+# class BoticeAnanymousSerializer(serializers.ModelSerializer):
+#   class Meta:
+#     model = Notice
+#     fields = ["id", "title","content"]

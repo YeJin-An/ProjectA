@@ -1,11 +1,11 @@
 from django.urls import path, include
-from rest_framework import routers
-from notice.views import Notice
+from rest_framework.routers import DefaultRouter
+from notice import views
 
 app_name = 'notice'
 
-router = routers.DefaultRouter()
-router.register('notices', Notice)
+router = DefaultRouter()
+router.register('notices', views.NoticeViewSet)
 
 urlpatterns = [
   path('api/',include(router.urls)),
